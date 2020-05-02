@@ -53,4 +53,8 @@ public class Map {
         System.out.println();
 
     }
+
+    public String getTileType(Position p){
+        return map[p.y][p.x];
+    }
 }
