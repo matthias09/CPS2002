@@ -1,20 +1,24 @@
-package com.company;
+package um.cps2002;
 import java.util.Random;
 import java.util.Scanner;
 
-class Player {
+public class Player {
     private Random rand = new Random();
     private Scanner sc = new Scanner(System.in);
 
-    Position position = new Position();
-    Position start = new Position();
+    public Position position = new Position();
+    public Position start = new Position();
     private int playerNum;
 
-    Player(int num){
+    public Player(int num){
         this.playerNum = num;
     }
 
-    Position move(Map map) {
+    public Player() {
+
+    }
+
+    public Position move(Map map) {
         char direction = 0;
         boolean valid = false;
 

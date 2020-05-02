@@ -1,18 +1,18 @@
-package com.company;
+package um.cps2002;
 import java.util.Random;
-class Map {
+public class Map {
     private Random rand = new Random();
 
     //Variables
     int size;
     private String [][] map;
 
-    Map(int size){
+    public Map(int size){
         this.size = size;
         map = new String[size][size];
     }
 
-    void generate_Map() {
+    public void generate_Map() {
         //Since there was no clear number of water tiles I will do size-3 water tiles, 1 treasure the rest green
 
         //Variables
@@ -54,7 +54,7 @@ class Map {
     }
 
 
-    String getTileType(Position p){
+    public String getTileType(Position p){
         return map[p.y][p.x];
     }
     void setTileType(Position p, String str){
