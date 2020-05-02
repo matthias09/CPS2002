@@ -1,5 +1,6 @@
 package um.cps2002;
 
+
 public class Position {
     public int x;
     public int y;

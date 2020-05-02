@@ -10,8 +10,12 @@ public class Player {
     public Position start = new Position();
     private int playerNum;
 
-    public Player(int num) {
+    public Player(int num){
         this.playerNum = num;
+    }
+
+    public Player() {
+
     }
 
     public Position move(Map map) {
@@ -22,9 +26,9 @@ public class Player {
             direction = sc.next().charAt(0);
 
             if((direction == 'U' && this.position.y == 0)
-                    || (direction == 'D' && this.position.y == map.size - 1)
-                    || (direction == 'L' && this.position.x == 0)
-                    || ((direction == 'R' && this.position.x == map.size - 1))){
+                || (direction == 'D' && this.position.y == map.size - 1)
+                || (direction == 'L' && this.position.x == 0)
+                || ((direction == 'R' && this.position.x == map.size - 1))){
                 System.out.println("Invalid move please try again");
             }else if (direction == 'U' || direction == 'D' || direction == 'L' || direction == 'R')
                 valid = true;
@@ -80,4 +84,7 @@ public class Player {
     Position getStart(){
         return this.start;
     }
+
 }
+
+

@@ -1,6 +1,5 @@
 package um.cps2002;
 
-
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -53,6 +52,7 @@ public class Main {
         }
         return map_size;
     }
+
     public static void main(String[] args) throws IOException {
         //Variables
         Position p = new Position();
@@ -68,6 +68,7 @@ public class Main {
         Map MainMap = new Map(m_size);
         Map[] map = new Map[n_Players];
         Player[] player = new Player[n_Players];
+        HtmlFile[] file = new HtmlFile[n_Players];
         for (int x = 0; x < n_Players; x++) {
             map[x] = new Map(m_size);
             player[x] = new Player(x);
@@ -75,14 +76,18 @@ public class Main {
 
         //Step 2
         MainMap.generate_Map();
-        for (int i = 0; i < n_Players; i++) {
+        for(int i = 0 ; i < n_Players; i++) {
             map[i] = MainMap;
         }
 
+        //Step 3
         for (int x = 0; x < n_Players; x++) {
             player[x].setPosition(map[x]);
+            file[x] = new HtmlFile(player[x], m_size);
             map[x].setTileType(player[x].position, "" + player[x].getNumber());
+            file[x].MapToHtml(map[x], true, player[x].getPosition(), p);
             map[x].setTileType(player[x].position, "G");
+            file[x].CalculateGrid(map[x]);
         }
 
         boolean winner = false;
@@ -97,29 +102,33 @@ public class Main {
                 int posy = previousPosition.y;
                 Position prev = new Position(posx, posy);
                 p = player[x].move(map[x]);
+                file[x].MapToHtml(map[x], false, p, prev);
             }
 
             //Step 6
-            for (int x = 0; x < n_Players; x++) {
-                System.out.print("Player " + (x + 1));
-                if (map[x].getTileType(player[x].position).equals("Y")) {
-                    System.out.println(" found the Treasure");
-                    winner = true;
-                } else if (map[x].getTileType(player[x].position).equals("B")) {
-                    System.out.println(" stepped on water and went back to his starting position");
-                    player[x].position.x = player[x].start.x;
-                    player[x].position.y = player[x].start.y;
-                } else {
-                    System.out.println(" stepped on grass");
+                for (int x = 0; x < n_Players; x++) {
+                    System.out.print("Player " + (x + 1));
+                    if (map[x].getTileType(player[x].position).equals("Y")) {
+                        System.out.println(" found the Treasure");
+                        winner = true;
+                    } else if (map[x].getTileType(player[x].position).equals("B")) {
+                        System.out.println(" stepped on water and went back to his starting position");
+                        player[x].position.x = player[x].start.x;
+                        player[x].position.y = player[x].start.y;
+                    } else {
+                        System.out.println(" stepped on grass");
+                    }
                 }
-            }
         }
- 
+
         //Declaration of winners
         System.out.println("Winner(s): ");
-        for (int x = 0; x < n_Players; x++) {
-            if (map[x].getTileType(player[x].position).equals("Y"))
-                System.out.print((x + 1) + " ");
-        }
+            for (int x = 0; x < n_Players; x++) {
+                if (map[x].getTileType(player[x].position).equals("Y"))
+                    System.out.print((x + 1) + " ");
+            }
     }
+
+
+
 }
