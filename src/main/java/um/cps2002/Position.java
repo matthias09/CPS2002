@@ -1,9 +1,9 @@
-package um.cps2002;
+package com.company;
 
-public class Position {
-    public int x;
-    public int y;
-    public Position(){
+class Position {
+    int x;
+    int y;
+    Position(){
         this.x=0;
         this.y=0;
     }
