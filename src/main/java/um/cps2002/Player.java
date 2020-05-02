@@ -76,4 +76,8 @@ public class Player {
     Position getPosition(){
         return this.position;
     }
+
+    Position getStart(){
+        return this.start;
+    }
 }
