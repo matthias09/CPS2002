@@ -85,5 +85,41 @@ public class Main {
             map[x].setTileType(player[x].position, "G");
         }
 
+        boolean winner = false;
+
+        while (!winner) {
+
+            //Step 4 and 5
+            for (int x = 0; x < n_Players; x++) {
+                System.out.println("Player " + (x + 1) + " please input your move (U = Up, D = down, L = Left, R = Right):");
+                Position previousPosition = player[x].getPosition();
+                int posx = previousPosition.x;
+                int posy = previousPosition.y;
+                Position prev = new Position(posx, posy);
+                p = player[x].move(map[x]);
+            }
+
+            //Step 6
+            for (int x = 0; x < n_Players; x++) {
+                System.out.print("Player " + (x + 1));
+                if (map[x].getTileType(player[x].position).equals("Y")) {
+                    System.out.println(" found the Treasure");
+                    winner = true;
+                } else if (map[x].getTileType(player[x].position).equals("B")) {
+                    System.out.println(" stepped on water and went back to his starting position");
+                    player[x].position.x = player[x].start.x;
+                    player[x].position.y = player[x].start.y;
+                } else {
+                    System.out.println(" stepped on grass");
+                }
+            }
+        }
+
+        //Declaration of winners
+        System.out.println("Winner(s): ");
+        for (int x = 0; x < n_Players; x++) {
+            if (map[x].getTileType(player[x].position).equals("Y"))
+                System.out.print((x + 1) + " ");
+        }
     }
 }
