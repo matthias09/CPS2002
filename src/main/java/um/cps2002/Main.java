@@ -1,4 +1,4 @@
-package com.company;
+package um.cps2002;
 
 import java.io.IOException;
 import java.util.Scanner;
