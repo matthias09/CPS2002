@@ -47,4 +47,25 @@ public class Player {
         }
         return this.position;
     }
+
+    void setPosition(Map map){
+        boolean valid = false;
+        int temp_x, temp_y;
+        Position tempPos = new Position();
+
+        while(!valid){
+            temp_x = rand.nextInt(map.size);
+            temp_y = rand.nextInt(map.size);
+            tempPos.x = temp_x;
+            tempPos.y = temp_y;
+
+            if((map.getTileType(tempPos)).equals("G")){
+                valid = true;
+                this.start.x = temp_x;
+                this.start.y = temp_y;
+                this.position.x = temp_x;
+                this.position.y = temp_y;
+            }
+        }
+    }
 }
