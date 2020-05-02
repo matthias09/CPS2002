@@ -72,4 +72,8 @@ public class Player {
     int getNumber(){
         return this.playerNum;
     }
+
+    Position getPosition(){
+        return this.position;
+    }
 }
