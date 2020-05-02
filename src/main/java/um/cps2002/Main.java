@@ -114,7 +114,7 @@ public class Main {
                 }
             }
         }
-
+ 
         //Declaration of winners
         System.out.println("Winner(s): ");
         for (int x = 0; x < n_Players; x++) {
