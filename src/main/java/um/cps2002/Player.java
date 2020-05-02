@@ -68,4 +68,8 @@ public class Player {
             }
         }
     }
+
+    int getNumber(){
+        return this.playerNum;
+    }
 }
