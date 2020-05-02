@@ -1,6 +1,7 @@
 package um.cps2002;
 
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -52,7 +53,37 @@ public class Main {
         }
         return map_size;
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        //Variables
+        Position p = new Position();
+        Main m = new Main();
+        int n_Players;
+        int m_size;
+
+        //Step 1
+        n_Players = m.get_num_players();
+        m_size = m.get_map_size(n_Players);
+
+        //Setting of variables
+        Map MainMap = new Map(m_size);
+        Map[] map = new Map[n_Players];
+        Player[] player = new Player[n_Players];
+        for (int x = 0; x < n_Players; x++) {
+            map[x] = new Map(m_size);
+            player[x] = new Player(x);
+        }
+
+        //Step 2
+        MainMap.generate_Map();
+        for (int i = 0; i < n_Players; i++) {
+            map[i] = MainMap;
+        }
+
+        for (int x = 0; x < n_Players; x++) {
+            player[x].setPosition(map[x]);
+            map[x].setTileType(player[x].position, "" + player[x].getNumber());
+            map[x].setTileType(player[x].position, "G");
+        }
 
     }
 }
