@@ -1,5 +1,7 @@
 package um.cps2002;
 import java.util.Random;
+import java.util.Scanner;
+
 public class Map {
     private Random rand = new Random();
 
@@ -13,8 +15,16 @@ public class Map {
     }
 
     public void generate_Map() {
-        //Since there was no clear number of water tiles I will do size-3 water tiles, 1 treasure the rest green
-
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        do {
+            System.out.println("What type of map do you wish to play in:\n (1)Safe \n (2)Hazardous");
+            choice = sc.nextInt();
+            if (choice == 1 || choice == 2)
+                break;
+            else
+                System.out.println("Incorrect input");
+        }while (true);
         //Variables
         int temp_x, temp_y;
 
