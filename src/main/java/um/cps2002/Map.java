@@ -19,7 +19,7 @@ public class Map {
     }
 
     public void generate_Map() {
-        /*Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         int choice;
         do {
             System.out.println("What type of map do you wish to play in:\n (1)Safe \n (2)Hazardous");
@@ -29,9 +29,9 @@ public class Map {
             else
                 System.out.println("Incorrect input");
         }while (true);
-*/
+
        int waterTiles;
-       int choice = 1;
+
         if(choice == 1){
             waterTiles = getWaterTiles(10);
         }else {

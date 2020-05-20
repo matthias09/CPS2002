@@ -101,7 +101,7 @@ public class Main {
                 int posx = previousPosition.x;
                 int posy = previousPosition.y;
                 Position prev = new Position(posx, posy);
-                //p = player[x].move(map[x]);
+                p = player[x].move(map[x]);
                 file[x].MapToHtml(map[x], false, p, prev);
             }
 
