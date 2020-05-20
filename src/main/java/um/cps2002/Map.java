@@ -7,7 +7,7 @@ public class Map {
 
     //Variables
     int size;
-    private String [][] map;
+    public String [][] map;
 
     public Map(int size){
         this.size = size;
@@ -79,7 +79,7 @@ public class Map {
     public String getTileType(Position p){
         return map[p.y][p.x];
     }
-    void setTileType(Position p, String str){
+    public void setTileType(Position p, String str){
         this.map[p.y][p.x] = str;
     }
 

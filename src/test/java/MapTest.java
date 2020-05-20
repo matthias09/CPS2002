@@ -38,4 +38,28 @@ public class MapTest {
         assertEquals(2,B);
         assertEquals(1,Y);
     }
+
+    @Test
+    public void getSetTileTypeTest(){
+        Map map;
+        map = new Map(5);
+
+        Position p = new Position(1,1);
+
+        map.setTileType(p,"W");
+        assertEquals("W",map.map[p.x][p.y] );
+        assertEquals("W",map.getTileType(p));
+    }
+
+    @Test
+    public void getWaterTilesTest(){
+        Map map = new Map(5);
+
+        //10% of 25 is 2.5 but method suppose to round downwards to not exceed percentage
+        assertEquals(2,map.getWaterTiles(10));
+
+
+        //50% of 25 is 12.5 so answer should be 12
+        assertEquals(12,map.getWaterTiles(50));
+    }
 }
