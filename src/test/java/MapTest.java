@@ -38,7 +38,7 @@ public class MapTest {
         assertEquals(2,B);
         assertEquals(1,Y);
     }
-
+*/
     @Test
     public void getSetTileTypeTest(){
         Map map;
@@ -62,5 +62,5 @@ public class MapTest {
         //50% of 25 is 12.5 so answer should be 12
         assertEquals(12,map.getWaterTiles(50));
     }
-*/
+
 }
