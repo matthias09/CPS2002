@@ -4,7 +4,7 @@ import um.cps2002.*;
 import static org.junit.Assert.*;
 
 public class PlayerTest {
-/*
+
     @Test
     public void testMoveUp() {
       Player p = new Player();
@@ -82,24 +82,5 @@ public class PlayerTest {
         assertEquals(expectedPos.y,p.position.y);
     }
 
-    @Test
-    public void testMoveWrong() {
-        Player p = new Player();
-        Map map = new Map(5);
-        map.generate_Map();
 
-        p.position.x = 1;
-        p.position.y = 0;
-
-        p.move(map,'U');
-        Position expectedPos = new Position();
-
-        expectedPos.x = 1;
-        expectedPos.y = 0;
-
-        assertEquals(expectedPos.x,p.position.x);
-        assertEquals(expectedPos.y,p.position.y);
-    }
-
- */
 }

@@ -4,11 +4,11 @@ import um.cps2002.*;
 import static org.junit.Assert.*;
 
 public class MapTest {
-/*
+
     @Test
     public void generateMapTest() {
         Map map;
-        //Since size is 5 there should be 1 (Y)ellow tile 2 (B)lue tiles and 22 (G)reen
+        //Given new enhancement water tiles should be 2
         map = new Map(5);
 
         map.generate_Map();
@@ -63,5 +63,5 @@ public class MapTest {
         assertEquals(12,map.getWaterTiles(50));
     }
 
- */
+
 }

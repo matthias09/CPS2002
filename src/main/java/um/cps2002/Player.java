@@ -18,12 +18,12 @@ public class Player {
 
     }
 
-    public Position move(Map map) {
+    public Position move(Map map, char move) {
         char direction = 0;
         boolean valid = false;
 
         while(!valid) {
-            direction = sc.next().charAt(0);
+            direction = move;
 
             if((direction == 'U' && this.position.y == 0)
                 || (direction == 'D' && this.position.y == map.size - 1)
