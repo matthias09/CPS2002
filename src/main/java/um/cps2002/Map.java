@@ -1,20 +1,42 @@
 package um.cps2002;
 import java.util.Random;
+import java.util.Scanner;
+
 public class Map {
     private Random rand = new Random();
 
     //Variables
     int size;
-    private String [][] map;
+    public String [][] map;
 
     public Map(int size){
         this.size = size;
         map = new String[size][size];
     }
 
-    public void generate_Map() {
-        //Since there was no clear number of water tiles I will do size-3 water tiles, 1 treasure the rest green
+    public int getWaterTiles(int percentage){
+        return (int) Math.floor(((percentage)*(size*size))/100);
+    }
 
+    public void generate_Map() {
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        do {
+            System.out.println("What type of map do you wish to play in:\n (1)Safe \n (2)Hazardous");
+            choice = sc.nextInt();
+            if (choice == 1 || choice == 2)
+                break;
+            else
+                System.out.println("Incorrect input");
+        }while (true);
+
+       int waterTiles;
+
+        if(choice == 1){
+            waterTiles = getWaterTiles(10);
+        }else {
+            waterTiles = getWaterTiles(25 + rand.nextInt(11));
+        }
         //Variables
         int temp_x, temp_y;
 
@@ -22,7 +44,7 @@ public class Map {
         map[rand.nextInt(size)][rand.nextInt(size)] = "Y";
 
         //Set Water
-        for (int a = 0; a < size - 3; a++) {
+        for (int a = 0; a < waterTiles; a++) {
             temp_x = rand.nextInt(size);
             temp_y = rand.nextInt(size);
             if (map[temp_y][temp_x] == null) {
@@ -57,7 +79,7 @@ public class Map {
     public String getTileType(Position p){
         return map[p.y][p.x];
     }
-    void setTileType(Position p, String str){
+    public void setTileType(Position p, String str){
         this.map[p.y][p.x] = str;
     }
 
