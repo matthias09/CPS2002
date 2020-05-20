@@ -14,6 +14,10 @@ public class Map {
         map = new String[size][size];
     }
 
+    public int getWaterTiles(int percentage){
+        return (int) Math.floor(((percentage)*(size*size))/100);
+    }
+
     public void generate_Map() {
         Scanner sc = new Scanner(System.in);
         int choice;
@@ -25,6 +29,14 @@ public class Map {
             else
                 System.out.println("Incorrect input");
         }while (true);
+
+       int waterTiles;
+
+        if(choice == 1){
+            waterTiles = getWaterTiles(10);
+        }else {
+            waterTiles = getWaterTiles(25 + rand.nextInt(11));
+        }
         //Variables
         int temp_x, temp_y;
 
@@ -32,7 +44,7 @@ public class Map {
         map[rand.nextInt(size)][rand.nextInt(size)] = "Y";
 
         //Set Water
-        for (int a = 0; a < size - 3; a++) {
+        for (int a = 0; a < waterTiles; a++) {
             temp_x = rand.nextInt(size);
             temp_y = rand.nextInt(size);
             if (map[temp_y][temp_x] == null) {
