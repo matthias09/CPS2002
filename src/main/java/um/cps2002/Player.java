@@ -18,7 +18,7 @@ public class Player {
 
     }
 
-    public Position move(Map map) {
+    public Position move(Maps map) {
         char direction = 0;
         boolean valid = false;
 
@@ -52,7 +52,7 @@ public class Player {
         return this.position;
     }
 
-    void setPosition(Map map){
+    void setPosition(Maps map){
         boolean valid = false;
         int temp_x, temp_y;
         Position tempPos = new Position();

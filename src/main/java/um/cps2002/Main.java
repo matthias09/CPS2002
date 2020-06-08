@@ -53,32 +53,51 @@ public class Main {
         return map_size;
     }
 
+    private String get_map_type(){
+        int choice;
+        while (true) {
+            try {
+                System.out.println("Please input the map you want to play in (1 for safe) (2 for hazardous):");
+                choice = sc.nextInt();
+
+                if (choice == 1)
+                    return "Safe";
+                else if (choice == 2)
+                    return "Hazardous";
+                else
+                    System.out.println("Incorrect input");
+            }catch (Exception e){
+                System.out.println("Incorrect input");
+                continue;
+            }
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         //Variables
         Position p = new Position();
         Main m = new Main();
         int n_Players;
         int m_size;
+        String m_type;
 
         //Step 1
         n_Players = m.get_num_players();
         m_size = m.get_map_size(n_Players);
+        m_type = m.get_map_type();
+
+        MapCreator creator = new MapCreator();
 
         //Setting of variables
-        Map MainMap = new Map(m_size);
-        Map[] map = new Map[n_Players];
+        Maps MainMap = creator.createMap(m_type,m_size);
+        Maps[] map = new Maps[n_Players];
         Player[] player = new Player[n_Players];
         HtmlFile[] file = new HtmlFile[n_Players];
         for (int x = 0; x < n_Players; x++) {
-            map[x] = new Map(m_size);
+            map[x] = MainMap;
             player[x] = new Player(x);
         }
 
-        //Step 2
-        MainMap.generate_Map();
-        for(int i = 0 ; i < n_Players; i++) {
-            map[i] = MainMap;
-        }
 
         //Step 3
         for (int x = 0; x < n_Players; x++) {
@@ -106,27 +125,27 @@ public class Main {
             }
 
             //Step 6
-                for (int x = 0; x < n_Players; x++) {
-                    System.out.print("Player " + (x + 1));
-                    if (map[x].getTileType(player[x].position).equals("Y")) {
-                        System.out.println(" found the Treasure");
-                        winner = true;
-                    } else if (map[x].getTileType(player[x].position).equals("B")) {
-                        System.out.println(" stepped on water and went back to his starting position");
-                        player[x].position.x = player[x].start.x;
-                        player[x].position.y = player[x].start.y;
-                    } else {
-                        System.out.println(" stepped on grass");
-                    }
+            for (int x = 0; x < n_Players; x++) {
+                System.out.print("Player " + (x + 1));
+                if (map[x].getTileType(player[x].position).equals("Y")) {
+                    System.out.println(" found the Treasure");
+                    winner = true;
+                } else if (map[x].getTileType(player[x].position).equals("B")) {
+                    System.out.println(" stepped on water and went back to his starting position");
+                    player[x].position.x = player[x].start.x;
+                    player[x].position.y = player[x].start.y;
+                } else {
+                    System.out.println(" stepped on grass");
                 }
+            }
         }
 
         //Declaration of winners
         System.out.println("Winner(s): ");
-            for (int x = 0; x < n_Players; x++) {
-                if (map[x].getTileType(player[x].position).equals("Y"))
-                    System.out.print((x + 1) + " ");
-            }
+        for (int x = 0; x < n_Players; x++) {
+            if (map[x].getTileType(player[x].position).equals("Y"))
+                System.out.print((x + 1) + " ");
+        }
     }
 
 
