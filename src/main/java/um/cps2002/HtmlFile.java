@@ -21,11 +21,11 @@ public class HtmlFile {
         hiddenMap = new String[size][size];
     }
 
-    FileWriter MapToHtml(Map map, boolean first, Position currentPosition, Position previousPosition) throws IOException {
+    FileWriter MapToHtml(Maps map, boolean first, Position currentPosition, Position previousPosition) throws IOException {
         Position p = new Position();
 
         String str = "";
-        for(int i = 0; i < map.size; i++){
+        for(int i = 0; i < map.getSize(); i++){
             str += " auto";
         }
 
@@ -52,9 +52,9 @@ public class HtmlFile {
         file.write("<div class=\"grid-container\" data-update=\"newContent.php\" data-refresh-interval=\"500\">");
 
         if(first) {
-            for (int i = 0; i < map.size; i++) {
+            for (int i = 0; i < map.getSize(); i++) {
                 p.y = i;
-                for (int i2 = 0; i2 < map.size; i2++) {
+                for (int i2 = 0; i2 < map.getSize(); i2++) {
                     p.x = i2;
                     if (map.getTileType(p).equals("B") || map.getTileType(p).equals("G") || map.getTileType(p).equals("Y")) {
                         this.hiddenMap[i][i2] = "<div style=\"background-color:Gray;\" class=\"grid-item\"></div>";
@@ -80,8 +80,8 @@ public class HtmlFile {
                 this.hiddenMap[previousPosition.y][previousPosition.x] = "<div style=\"background-color:Green;\" class=\"grid-item\"></div>";
             }
 
-            for (int i = 0; i < map.size; i++) {
-                for (int i2 = 0; i2 < map.size; i2++) {
+            for (int i = 0; i < map.getSize(); i++) {
+                for (int i2 = 0; i2 < map.getSize(); i2++) {
                     file.write(this.hiddenMap[i][i2]);
                 }
             }
@@ -95,11 +95,11 @@ public class HtmlFile {
         return file;
     }
     //calculate what teh grid looks like in order to utilize it when the user steps on one of the tiles
-    void CalculateGrid(Map map){
+    void CalculateGrid(Maps map){
         Position p = new Position();
-        for(int i = 0 ; i < map.size; i++){
+        for(int i = 0 ; i < map.getSize(); i++){
             p.y = i;
-            for(int i2 = 0; i2 < map.size; i2++){
+            for(int i2 = 0; i2 < map.getSize(); i2++){
                 p.x = i2;
                 if(map.getTileType(p).equals("B")){
                     this.grids[i][i2] = ("<div style=\"background-color:Blue;\" class=\"grid-item\"></div>");
