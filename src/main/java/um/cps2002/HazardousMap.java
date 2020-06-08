@@ -1,15 +1,15 @@
 package um.cps2002;
-import java.util.Random;
-import java.util.Scanner;
 
-public class Map {
+import java.util.Random;
+
+public class HazardousMap implements Maps {
     private Random rand = new Random();
 
     //Variables
-    int size;
+    public int size;
     public String [][] map;
 
-    public Map(int size){
+    public HazardousMap(int size){
         this.size = size;
         map = new String[size][size];
     }
@@ -19,24 +19,9 @@ public class Map {
     }
 
     public void generate_Map() {
-        Scanner sc = new Scanner(System.in);
-        int choice;
-        do {
-            System.out.println("What type of map do you wish to play in:\n (1)Safe \n (2)Hazardous");
-            choice = sc.nextInt();
-            if (choice == 1 || choice == 2)
-                break;
-            else
-                System.out.println("Incorrect input");
-        }while (true);
+        int waterTiles;
+        waterTiles = getWaterTiles(25+rand.nextInt(11));
 
-       int waterTiles;
-
-        if(choice == 1){
-            waterTiles = getWaterTiles(10);
-        }else {
-            waterTiles = getWaterTiles(25 + rand.nextInt(11));
-        }
         //Variables
         int temp_x, temp_y;
 
@@ -83,4 +68,7 @@ public class Map {
         this.map[p.y][p.x] = str;
     }
 
+    public int getSize(){
+        return size;
+    }
 }
