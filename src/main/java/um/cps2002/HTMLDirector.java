@@ -16,8 +16,8 @@ public class HTMLDirector {
         builds.GenerateMap(map, cp);
     }
 
-    void Update(Maps map, Position cp, Position pp) throws IOException {
-        builds.UpdateHTML(map, cp, pp);
+    void Update(Maps map, Position cp, Position pp, Player player) throws IOException {
+        builds.UpdateHTML(map, cp, pp, player);
         builds.outputMap();
     }
 

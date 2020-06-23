@@ -3,6 +3,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Player {
+    private int team;
     private Random rand = new Random();
     private Scanner sc = new Scanner(System.in);
 
@@ -16,6 +17,14 @@ public class Player {
 
     public Player() {
 
+    }
+
+    public void setTeam(int t){
+        this.team = t;
+    }
+
+    public int getTeam(){
+        return this.team;
     }
 
     public Position move(Maps map) {

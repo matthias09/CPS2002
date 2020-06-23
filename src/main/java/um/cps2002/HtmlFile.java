@@ -22,8 +22,8 @@ public class HtmlFile {
     }
 
     public HtmlFile(){
-
     }
+
     void setMapSize(int size){
         grids = new String[size][size];
         hiddenMap = new String[size][size];
@@ -31,7 +31,7 @@ public class HtmlFile {
 
 
 
-    String MapToHtml(Maps map, boolean first, Position currentPosition, Position previousPosition){
+    String MapToHtml(Maps map, boolean first, Position currentPosition, Position previousPosition, Player player){
         Position p = new Position();
 
         String html = "";
@@ -72,7 +72,7 @@ public class HtmlFile {
                         this.hiddenMap[i][i2] = "<div style=\"background-color:Gray;\" class=\"grid-item\"></div>";
                         html+=(this.hiddenMap[i][i2]);
                     } else {
-                        this.hiddenMap[i][i2] = "<div style=\"background-color:Green;\" class=\"grid-item\">P</div>";
+                        this.hiddenMap[i][i2] = "<div style=\"background-color:Green;\" class=\"grid-item\">P"+(player.getNumber()+1)+"</div>";
                         html+=(this.hiddenMap[i][i2]);
                     }
                 }
@@ -80,12 +80,12 @@ public class HtmlFile {
             //setting the player's current position on the HTML file grid
         } else{
             if(map.getTileType(currentPosition).equals("G")){
-                this.hiddenMap[currentPosition.y][currentPosition.x] = "<div style=\"background-color:Green;\" class=\"grid-item\">P</div>";
+                this.hiddenMap[currentPosition.y][currentPosition.x] = "<div style=\"background-color:Green;\" class=\"grid-item\">P"+(player.getNumber()+1)+"</div>";
             } else if(map.getTileType(currentPosition).equals("B")){
                 this.hiddenMap[currentPosition.y][currentPosition.x] = "<div style=\"background-color:Blue;\" class=\"grid-item\"></div>";
-                this.hiddenMap[this.player.getStart().y][this.player.getStart().x] = "<div style=\"background-color:Green;\" class=\"grid-item\">P</div>";
+                this.hiddenMap[player.getStart().y][player.getStart().x] = "<div style=\"background-color:Green;\" class=\"grid-item\">P"+(player.getNumber()+1)+"</div>";
             } else if(map.getTileType(currentPosition).equals("Y")){
-                this.hiddenMap[currentPosition.y][currentPosition.x] = "<div style=\"background-color:Yellow;\" class=\"grid-item\">P</div>";
+                this.hiddenMap[currentPosition.y][currentPosition.x] = "<div style=\"background-color:Yellow;\" class=\"grid-item\">P"+(player.getNumber()+1)+"</div>";
             }
 
             if(map.getTileType(previousPosition).equals("G")){

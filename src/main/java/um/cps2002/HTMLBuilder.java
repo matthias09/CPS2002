@@ -17,12 +17,13 @@ public class HTMLBuilder implements MapBuilder {
     }
 
     public void GenerateMap(Maps map, Position cp) {
-        this.mapcode = file.MapToHtml(map, true, cp, cp);
+        Player p = new Player();
+        this.mapcode = file.MapToHtml(map, true, cp, cp, p);
         file.CalculateGrid(map);
     }
 
-    public void UpdateHTML(Maps map, Position cp, Position pp){
-        this.mapcode = file.MapToHtml(map, false, cp, pp);
+    public void UpdateHTML(Maps map, Position cp, Position pp, Player player){
+        this.mapcode = file.MapToHtml(map, false, cp, pp, player);
     }
 
     public void outputMap() throws IOException {
