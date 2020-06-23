@@ -87,11 +87,11 @@ public class HtmlFile {
             } else if(map.getTileType(currentPosition).equals("Y")){
                 this.hiddenMap[currentPosition.y][currentPosition.x] = "<div style=\"background-color:Yellow;\" class=\"grid-item\">P"+(player.getNumber()+1)+"</div>";
             }
-
-            if(map.getTileType(previousPosition).equals("G")){
-                this.hiddenMap[previousPosition.y][previousPosition.x] = "<div style=\"background-color:Green;\" class=\"grid-item\"></div>";
+            if(previousPosition!=null) {
+                if (map.getTileType(previousPosition).equals("G")) {
+                    this.hiddenMap[previousPosition.y][previousPosition.x] = "<div style=\"background-color:Green;\" class=\"grid-item\"></div>";
+                }
             }
-
             for (int i = 0; i < map.getSize(); i++) {
                 for (int i2 = 0; i2 < map.getSize(); i2++) {
                     html+=(this.hiddenMap[i][i2]);

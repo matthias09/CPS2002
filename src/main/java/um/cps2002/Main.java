@@ -156,7 +156,7 @@ public class Main {
         //Step 3
         for (int x = 0; x < n_Players; x++) {
             int x1 = (player[x].getTeam());
-            System.out.println("x1 : "+player[x].getTeam());
+            System.out.println("Player "+(player[x].getNumber()+1)+" assigned to Team : "+(player[x].getTeam()+1));
 
             player[x].setPosition(map[x1]);
 
@@ -177,8 +177,11 @@ public class Main {
             }
         }
 
-
-
+        for(int i = 0; i < n_Players; i++)
+        {
+            int x1 = player[i].getTeam();
+            htmlbuild[x1].Update(map[x1], player[i].getPosition(), null, player[i]);
+        }
         boolean winner = false;
 
         while (!winner) {
@@ -186,6 +189,8 @@ public class Main {
             //Step 4 and 5
             for (int x = 0; x < n_Players; x++) {
                 int x1 = player[x].getTeam();
+
+                htmlbuild[x1].Update(map[x1], player[x].getPosition(), null, player[x]);
 
                 System.out.println("Player " + (x + 1) + " from Team "+player[x].getTeam()+" please input your move (U = Up, D = down, L = Left, R = Right):");
                 Position previousPosition = player[x].getPosition();
