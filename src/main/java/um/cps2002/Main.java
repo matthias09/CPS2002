@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Main {
     private Scanner sc = new Scanner(System.in);
-    HTMLBuilder builder = new HTMLBuilder();
 
     private int get_num_players(){
         //Validating number of players input
@@ -76,7 +75,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         //Variables
-        Position p = new Position();
+        Position p;
         Main m = new Main();
         int n_Players;
         int m_size;
@@ -93,9 +92,8 @@ public class Main {
         Maps MainMap = creator.createMap(m_type,m_size);
         Maps[] map = new Maps[n_Players];
         Player[] player = new Player[n_Players];
-        //HtmlFile[] file = new HtmlFile[n_Players];
-        //CHANGED HTMLFILE TO HTMLBUILDER
-        HTMLBuilder[] builds = new HTMLBuilder[n_Players];
+        
+        HTMLDirector[] htmlbuild = new HTMLDirector[n_Players];
 
         for (int x = 0; x < n_Players; x++) {
             map[x] = MainMap;
@@ -106,19 +104,17 @@ public class Main {
         //Step 3
         for (int x = 0; x < n_Players; x++) {
             player[x].setPosition(map[x]);
-            //builds[x] = new HtmlFile(player[x], m_size);
-            //ADDED NEW METHOD
-            builds[x] = new HTMLBuilder();
-            builds[x].buildMap(m_size);
+
+            htmlbuild[x] = new HTMLDirector();
 
             map[x].setTileType(player[x].position, "" + player[x].getNumber());
-            //file[x].MapToHtml(map[x], true, player[x].getPosition(), p);
-            builds[x].GenerateMap(map[x], player[x].getPosition(), p);
+
+            htmlbuild[x].Create(map[x], player[x].getPosition(), m_size);
 
             map[x].setTileType(player[x].position, "G");
-            //ALREADY IN THE HTMLBUILDER CLASS
-            //file[x].CalculateGrid(map[x]);
         }
+
+
 
         boolean winner = false;
 
@@ -133,9 +129,7 @@ public class Main {
                 Position prev = new Position(posx, posy);
                 p = player[x].move(map[x]);
 
-                builds[x].UpdateHTML(map[x], p, prev);
-                builds[x].outputMap();
-                //file[x].MapToHtml(map[x], false, p, prev);
+                htmlbuild[x].Update(map[x], p, prev);
             }
 
             //Step 6

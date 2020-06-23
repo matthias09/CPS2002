@@ -8,8 +8,7 @@ public class HTMLBuilder implements MapBuilder {
     private HtmlFile file;
     String mapcode;
 
-    public HTMLBuilder(){
-    }
+    public HTMLBuilder(){}
 
     public void buildMap(int size){
         //this.map = new HTMLMap();
@@ -17,8 +16,8 @@ public class HTMLBuilder implements MapBuilder {
         file.setMapSize(size);
     }
 
-    public void GenerateMap(Maps map, Position cp, Position pp) {
-        this.mapcode = file.MapToHtml(map, true, cp, pp);
+    public void GenerateMap(Maps map, Position cp) {
+        this.mapcode = file.MapToHtml(map, true, cp, cp);
         file.CalculateGrid(map);
     }
 
