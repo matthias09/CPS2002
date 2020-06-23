@@ -58,8 +58,8 @@ public class Player {
         Position tempPos = new Position();
 
         while(!valid){
-            temp_x = rand.nextInt(map.size);
-            temp_y = rand.nextInt(map.size);
+            temp_x = rand.nextInt(map.getSize());
+            temp_y = rand.nextInt(map.getSize());
             tempPos.x = temp_x;
             tempPos.y = temp_y;
 
