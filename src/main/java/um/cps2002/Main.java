@@ -7,31 +7,33 @@ import java.util.Random;
 public class Main {
     private Scanner sc = new Scanner(System.in);
 
-    private PlayerTeam[] ShuffleTeams(int n_Players, int n_teams, Player[] player){
-        //Player[] player = new Player[n_Players];
+    private PlayerTeam[] AssignTeams(int n_Players, int n_teams, Player[] player){
         PlayerTeam[] team = new PlayerTeam[n_teams];
-        Random rand = new Random();
-        float division = n_Players/n_teams;
-        //for(int i = 0; i < n_Players; i++){
-            //player[i] = new Player(i);
+
         for(int i = 0; i < n_teams; i++){
-            //initialising the PlayerTeams with no. of players and team number
-            team[i] = new PlayerTeam(n_Players, i);
+            team[i] = new PlayerTeam(i);
         }
 
         int i = 0;
-            if(division == (int)division){
-                for(int i2 = 0; i2 < n_Players; i2++){
-                    player[i2] = new Player(i2);
-                    //player[i2].setTeam(i);
-                    team[i].addPlayer(player[i2]);
-                    i++;
-                  if(i == n_teams){
-                      i=0;
-                  }
-                }
+        for(int i2 = 0; i2 < n_Players; i2++){
+            team[i].addPlayer(player[i2]);
+            i++;
+            if(i == n_teams){
+                i=0;
             }
+        }
         return team;
+    }
+
+    public Player[] ShuffleArray(Player[] player){
+        Random rand = new Random();
+        for(int i = 0; i < player.length; i++) {
+            int randomNum = rand.nextInt((player.length-1) + 1);
+            Player temp = player[i];
+            player[i] = player[randomNum];
+            player[randomNum] = temp;
+        }
+        return player;
     }
 
     private int[] get_num_players(){
@@ -133,22 +135,15 @@ public class Main {
         Maps MainMap = creator.createMap(m_type,m_size);
         Maps[] map = new Maps[n_teams];
         Player[] player = new Player[n_Players];
-        PlayerTeam[] teams = m.ShuffleTeams(n_Players, n_teams, player);
+        for(int i = 0; i < n_Players; i++){
+            player[i] = new Player(i);
+        }
+        player = m.ShuffleArray(player);
 
-       /* if(n_teams <= 0) {
-            PlayerTeam[] teams = new PlayerTeam[1];
-        }else{
-
-        } */
-        //fix later
-        //PlayerTeam[] teams = new PlayerTeam[n_teams];
-
+        PlayerTeam[] teams = m.AssignTeams(n_Players, n_teams, player);
 
         HTMLDirector[] htmlbuild = new HTMLDirector[n_teams];
 
-       /* for (int x = 0; x < n_Players; x++) {
-            player[x] = new Player(x);
-        } */
         for (int x = 0; x < n_teams; x++) {
             map[x] = MainMap;
         }
@@ -169,15 +164,7 @@ public class Main {
 
             map[x1].setTileType(player[x].position, "G");
 
-           /* for(int i = 0; i < n_teams; i++){
-                if(teams[i].containsPlayer(player[x].getNumber())){
-                    teams[i].updateMap(map[x1]);
-                    teams[i].updatePlayer(player[x]);
-                    break;
-                }
-            } */
             teams[x1].setMap(map[x1]);
-            //teams[x1].updatePlayer(player[x]);
 
         }
 
@@ -202,13 +189,7 @@ public class Main {
                 int posy = previousPosition.y;
                 Position prev = new Position(posx, posy);
                 p = player[x].move(map[x1]);
-        /*
-                for(int i = 0; i < n_teams; i++){
-                    if(teams[i].containsPlayer(player[x].getNumber())){
-                        teams[i].updatePlayer(player[x]);
-                    }
-                } */
-                //teams[x1].updatePlayer(player[x]);
+
                 htmlbuild[x1].Update(map[x1], p, prev, player[x]);
                 teams[x1].setMap(map[x1]);
             }
