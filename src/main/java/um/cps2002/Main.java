@@ -15,14 +15,15 @@ public class Main {
         //for(int i = 0; i < n_Players; i++){
             //player[i] = new Player(i);
         for(int i = 0; i < n_teams; i++){
-            team[i] = new PlayerTeam(n_Players);
+            //initialising the PlayerTeams with no. of players and team number
+            team[i] = new PlayerTeam(n_Players, i);
         }
 
         int i = 0;
             if(division == (int)division){
                 for(int i2 = 0; i2 < n_Players; i2++){
                     player[i2] = new Player(i2);
-                    player[i2].setTeam(i);
+                    //player[i2].setTeam(i);
                     team[i].addPlayer(player[i2]);
                     i++;
                   if(i == n_teams){
@@ -168,13 +169,16 @@ public class Main {
 
             map[x1].setTileType(player[x].position, "G");
 
-            for(int i = 0; i < n_teams; i++){
+           /* for(int i = 0; i < n_teams; i++){
                 if(teams[i].containsPlayer(player[x].getNumber())){
                     teams[i].updateMap(map[x1]);
                     teams[i].updatePlayer(player[x]);
                     break;
                 }
-            }
+            } */
+            teams[x1].setMap(map[x1]);
+            //teams[x1].updatePlayer(player[x]);
+
         }
 
         for(int i = 0; i < n_Players; i++)
@@ -198,14 +202,15 @@ public class Main {
                 int posy = previousPosition.y;
                 Position prev = new Position(posx, posy);
                 p = player[x].move(map[x1]);
-
+        /*
                 for(int i = 0; i < n_teams; i++){
                     if(teams[i].containsPlayer(player[x].getNumber())){
                         teams[i].updatePlayer(player[x]);
                     }
-                }
-
+                } */
+                //teams[x1].updatePlayer(player[x]);
                 htmlbuild[x1].Update(map[x1], p, prev, player[x]);
+                teams[x1].setMap(map[x1]);
             }
 
             //Step 6
@@ -230,7 +235,7 @@ public class Main {
         for (int x = 0; x < n_Players; x++) {
             int x1 = player[x].getTeam();
             if (map[x1].getTileType(player[x].position).equals("Y"))
-                System.out.print((x + 1) + " ");
+                System.out.print("Team "+(x + 1) + " ");
         }
     }
 

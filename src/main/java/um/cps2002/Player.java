@@ -2,10 +2,11 @@ package um.cps2002;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Player {
+public class Player implements Team{
     private int team;
     private Random rand = new Random();
     private Scanner sc = new Scanner(System.in);
+    private Maps VisibleMap;
 
     public Position position = new Position();
     public Position start = new Position();
@@ -17,6 +18,11 @@ public class Player {
 
     public Player() {
 
+    }
+
+    @Override
+    public void update(Object o){
+        this.VisibleMap = (Maps)o;
     }
 
     public void setTeam(int t){
