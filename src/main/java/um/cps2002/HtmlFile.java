@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class HtmlFile {
-    Player player;
     String[][] grids;
     String[][] hiddenMap;
 

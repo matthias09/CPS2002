@@ -10,18 +10,19 @@ public class PlayerTeam {
     private ArrayList<Player> player = new ArrayList<>();
     private int teamno;
 
-    PlayerTeam(int teamno){
+    public PlayerTeam(int teamno){
         //calculating the no. of players on the team
         //(team size)
         this.teamno = teamno;
     }
 
     //observer
-    void addPlayer(Player player){
+    public void addPlayer(Player player){
         player.setTeam(this.teamno);
         this.player.add(player);
     }
-
+    //updating the observer using the Team interface
+    //this forms a one-to-many relationship
     public void setMap(Maps map){
         this.map = map;
         Team team;

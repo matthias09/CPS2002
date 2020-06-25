@@ -20,6 +20,7 @@ public class Player implements Team{
 
     }
 
+    //using the interface in order to update the map which belongs to many users
     @Override
     public void update(Object o){
         this.VisibleMap = (Maps)o;
