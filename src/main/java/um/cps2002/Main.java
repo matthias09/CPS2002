@@ -75,7 +75,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         //Variables
-        Position p = new Position();
+        Position p;
         Main m = new Main();
         int n_Players;
         int m_size;
@@ -92,7 +92,9 @@ public class Main {
         Maps MainMap = creator.createMap(m_type,m_size);
         Maps[] map = new Maps[n_Players];
         Player[] player = new Player[n_Players];
-        HtmlFile[] file = new HtmlFile[n_Players];
+        
+        HTMLDirector[] htmlbuild = new HTMLDirector[n_Players];
+
         for (int x = 0; x < n_Players; x++) {
             map[x] = MainMap;
             player[x] = new Player(x);
@@ -102,12 +104,17 @@ public class Main {
         //Step 3
         for (int x = 0; x < n_Players; x++) {
             player[x].setPosition(map[x]);
-            file[x] = new HtmlFile(player[x], m_size);
+
+            htmlbuild[x] = new HTMLDirector();
+
             map[x].setTileType(player[x].position, "" + player[x].getNumber());
-            file[x].MapToHtml(map[x], true, player[x].getPosition(), p);
+
+            htmlbuild[x].Create(map[x], player[x].getPosition(), m_size);
+
             map[x].setTileType(player[x].position, "G");
-            file[x].CalculateGrid(map[x]);
         }
+
+
 
         boolean winner = false;
 
@@ -121,7 +128,8 @@ public class Main {
                 int posy = previousPosition.y;
                 Position prev = new Position(posx, posy);
                 p = player[x].move(map[x]);
-                file[x].MapToHtml(map[x], false, p, prev);
+
+                htmlbuild[x].Update(map[x], p, prev);
             }
 
             //Step 6
