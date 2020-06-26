@@ -6,7 +6,7 @@ public class Player implements Team{
     private int team;
     private Random rand = new Random();
     private Scanner sc = new Scanner(System.in);
-    private Maps VisibleMap;
+    public Maps VisibleMap;
 
     public Position position = new Position();
     public Position start = new Position();
