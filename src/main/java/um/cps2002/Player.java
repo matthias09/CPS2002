@@ -2,9 +2,11 @@ package um.cps2002;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Player {
+public class Player implements Team{
+    private int team;
     private Random rand = new Random();
     private Scanner sc = new Scanner(System.in);
+    public Maps VisibleMap;
 
     public Position position = new Position();
     public Position start = new Position();
@@ -18,6 +20,20 @@ public class Player {
 
     }
 
+    //using the interface in order to update the map which belongs to many users
+    @Override
+    public void update(Object o){
+        this.VisibleMap = (Maps)o;
+    }
+
+    public void setTeam(int t){
+        this.team = t;
+    }
+
+    public int getTeam(){
+        return this.team;
+    }
+
     public Position move(Maps map) {
         char direction = 0;
         boolean valid = false;
@@ -26,9 +42,9 @@ public class Player {
             direction = sc.next().charAt(0);
 
             if((direction == 'U' && this.position.y == 0)
-                || (direction == 'D' && this.position.y == map.size - 1)
+                || (direction == 'D' && this.position.y == map.getSize() - 1)
                 || (direction == 'L' && this.position.x == 0)
-                || ((direction == 'R' && this.position.x == map.size - 1))){
+                || (direction == 'R' && this.position.x == map.getSize() - 1)){
                 System.out.println("Invalid move please try again");
             }else if (direction == 'U' || direction == 'D' || direction == 'L' || direction == 'R')
                 valid = true;
